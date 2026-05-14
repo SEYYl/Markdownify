@@ -126,7 +126,7 @@ HTML_TEMPLATE = """
         </div>
     </div>
     <div class="footer">
-        ⚡ 开源项目 · <a href="https://github.com/你的用户名/html-to-markdown-web" target="_blank">GitHub 仓库</a>
+        ⚡ 开源项目 · <a href="https://github.com/SEYYl/html-to-markdown-web" target="_blank">GitHub 仓库</a>
     </div>
 </div>
 
