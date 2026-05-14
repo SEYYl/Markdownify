@@ -36,5 +36,5 @@ pip install -r requirements.txt
 
 # 运行
 python app.py
-
+```
 # 打开浏览器访问 http://127.0.0.1:5000 即可使用。
