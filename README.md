@@ -1,3 +1,6 @@
+## 🌏 语言
+[简体中文](./README.md) | [English](./README.en.md)
+
 一个功能丰富、界面现代的在线工具，可将任意 HTML 代码快速转换为 Markdown 格式。基于 Python Flask 和 `html2text` 库，支持表格、链接、图片、代码块等丰富元素。
 
 ## ✨ 特性
@@ -116,5 +119,5 @@ html-to-markdown-web/
 ```markdown
 ## 🖼️ 界面预览
 
-![网页截图](./screenshots/20260516_024924.png )
+![网页截图1](./screenshots/20260516_024924.png)
 ```
