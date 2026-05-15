@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>HTML to Markdown 在线转换器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+    <script>
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            headerIds: false,
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>📝 HTML → Markdown 转换器</h1>
+    <div class="sub">粘贴 HTML、拖拽文件或选择示例，实时转换</div>
+
+    <div class="toolbar">
+        <div class="toolbar-left example-group">
+            <button class="example-btn" data-example="simple">📄 简单示例</button>
+            <button class="example-btn" data-example="table">📊 表格示例</button>
+            <button class="example-btn" data-example="code">💻 代码块示例</button>
+        </div>
+        <div class="toolbar-actions">
+            <button id="clearBtn" class="theme-btn">🧹 清空</button>
+            <button id="urlConvertBtn" class="theme-btn">🌐 URL 转换</button>
+            <button id="layoutToggleBtn" class="theme-btn">当前布局：堆叠</button>
+            <button id="themeToggle" class="theme-btn">🌙 深色模式</button>
+        </div>
+    </div>
+
+    <div class="modal" id="urlModal" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-card">
+            <div class="modal-header">
+                <span>🌐 URL 转换</span>
+                <button id="urlModalClose" class="icon-btn">✕</button>
+            </div>
+            <div class="modal-body">
+                <label for="urlInput">请输入网页地址（http:// 或 https://）</label>
+                <input id="urlInput" type="url" placeholder="https://example.com" autocomplete="off">
+                <p class="modal-help">支持直接抓取网页并转换为 Markdown，可用于在线文章、文档或博客页面。</p>
+            </div>
+            <div class="modal-footer">
+                <button id="urlModalCancel" class="theme-btn secondary">取消</button>
+                <button id="urlModalSubmit" class="theme-btn">开始转换</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="converter-box">
+        <div class="panel" id="inputPanel">
+            <div class="panel-header">
+                <div class="panel-title">📄 HTML 输入</div>
+                <div class="panel-actions">
+                    <button id="pasteBtn" class="copy-btn">📋 粘贴</button>
+                    <span class="panel-note">💡 支持拖拽 .html 文件</span>
+                </div>
+            </div>
+            <textarea id="htmlInput" rows="15" placeholder="在此粘贴 HTML 代码，或拖拽 HTML 文件到此处..."></textarea>
+        </div>
+        <div class="panel">
+            <div class="panel-header">
+                <div class="panel-title">📝 Markdown 输出</div>
+                <div class="panel-actions">
+                    <button id="downloadBtn" class="copy-btn">⬇️ 下载</button>
+                    <button id="copyBtn" class="copy-btn">📋 复制</button>
+                </div>
+            </div>
+            <div id="markdownOutput" class="markdown-output"></div>
+        </div>
+        <div class="panel preview-panel">
+            <div class="panel-header">
+                <div class="panel-title">🔍 Markdown 预览</div>
+                <div class="panel-actions">
+                    <button id="previewToggleBtn" class="copy-btn">🔎 放大预览</button>
+                </div>
+            </div>
+            <div id="markdownPreview" class="markdown-output preview-output"></div>
+        </div>
+    </div>
+    <footer>
+        ⚡ 开源项目 · <a href="https://github.com/SEYYl/html-to-markdown-web" target="_blank">GitHub 仓库</a>
+    </footer>
+
+    <div class="toast" id="toastContainer" aria-live="polite"></div>
+</div>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

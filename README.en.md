@@ -13,6 +13,12 @@ A lightweight Flask app that converts HTML code into Markdown text. It is ideal 
 - ⚡ **Real-time Conversion** – Converts while typing, with debouncing to reduce requests
 - 🗂️ **Drag-and-Drop Upload** – Drag `.html` files into the editor to convert
 - 🖱️ **One-Click Copy** – Copy the generated Markdown result to the clipboard
+- ⬇️ **Download Markdown** – Save the generated result as a `.md` file
+- 🧹 **Clear Input** – Clear the HTML editor and reset outputs
+- 🔍 **Markdown Preview** – Render a live preview and highlight code blocks
+- 🔎 **Zoom Preview** – Expand the preview panel to full width and hide the other panels for easier reading
+- 🌐 **URL Conversion** – Enter a webpage address and convert the page directly into Markdown
+- 🧱 **Side-by-Side Layout** – Switch to a side-by-side layout so editing and preview are shown together on wide screens
 - 📚 **Sample Templates** – Built-in examples for simple text, tables, and code blocks
 - 📱 **Responsive Design** – Works on both desktop and mobile
 - 🔓 **Open Source** – Self-host or extend the project easily
@@ -40,7 +46,21 @@ Response example:
 { "markdown": "Example\n" }
 ```
 
-> Note: The page currently outputs plain Markdown text. Code blocks are preserved as Markdown, and syntax highlighting can be added later with a Markdown renderer.
+Backend URL conversion endpoint: `POST /convert-url`
+
+Request example:
+
+```json
+{ "url": "https://example.com" }
+```
+
+Response example:
+
+```json
+{ "markdown": "Example\n" }
+```
+
+> Note: The page now shows both raw Markdown text and a live rendered preview. Code blocks in the preview are syntax highlighted.
 
 ## 🚀 Try It Online
 
@@ -99,10 +119,15 @@ You can deploy this project to cloud platforms such as Render, Vercel, or Python
 
 ```
 html-to-markdown-web/
-├── app.py               # Flask backend and frontend interface
+├── app.py               # Flask backend entrypoint
 ├── requirements.txt     # Python dependencies
-├── static/              # Static assets (currently empty)
-├── templates/           # Empty folder, frontend is embedded in app.py
+├── static/              # Static assets (CSS, JS)
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── main.js
+├── templates/           # Frontend template files
+│   └── index.html
 ├── .gitignore           # Git ignore file
 ├── LICENSE              # MIT License
 └── README.md            # Project documentation
