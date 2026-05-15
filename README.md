@@ -1,12 +1,3 @@
-好的，我帮你优化 README.md，使其更专业、信息更完整，并反映最新功能。你可以直接替换原来的内容。
-
-```markdown
-# 📝 HTML to Markdown 在线转换器
-
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
-[![Render](https://img.shields.io/badge/Deploy%20on-Render-46C018)](https://render.com)
-
 一个功能丰富、界面现代的在线工具，可将任意 HTML 代码快速转换为 Markdown 格式。基于 Python Flask 和 `html2text` 库，支持表格、链接、图片、代码块等丰富元素。
 
 ## ✨ 特性
