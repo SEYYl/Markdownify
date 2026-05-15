@@ -1,29 +1,56 @@
-## 🌏 语言
+# HTML to Markdown 在线转换器
+
 [简体中文](./README.md) | [English](./README.en.md)
 
-一个功能丰富、界面现代的在线工具，可将任意 HTML 代码快速转换为 Markdown 格式。基于 Python Flask 和 `html2text` 库，支持表格、链接、图片、代码块等丰富元素。
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)
 
-## ✨ 特性
+一个基于 Flask 的轻量工具，可将 HTML 代码快速转换为 Markdown 文本，适合用于笔记、博客、文档或 Markdown 编辑器。
 
-- 🌗 **深色模式** – 支持明暗主题切换，自动跟随系统偏好
-- ⚡ **实时转换** – 输入即转换，无需点击按钮（带有防抖优化）
-- 🖱️ **一键复制** – 点击按钮即可复制 Markdown 结果到剪贴板
-- 🗂️ **拖拽上传** – 直接将 `.html` 文件拖入编辑器，自动读取并转换
-- 📚 **示例模板** – 提供简单文本、表格、代码块示例，一键填充
-- 📱 **响应式设计** – 完美适配桌面端与移动端
-- 🎨 **代码高亮** – 输出中的代码块自动高亮显示
-- 🌐 **免费在线使用** – 无需注册，打开浏览器即可使用
-- 🔓 **完全开源** – 可自行部署或二次开发
+## ✨ 功能
+
+- 🌗 **亮/暗主题切换** – 支持页面主题切换
+- ⚡ **实时转换** – 输入即转换，带防抖优化，减少请求频率
+- 🗂️ **拖拽 HTML 文件** – 支持直接拖入 `.html` 文件自动读取并转换
+- 🖱️ **一键复制** – 将生成的 Markdown 结果复制到剪贴板
+- 📚 **示例模板** – 内置简单文本、表格、代码块示例
+- 📱 **响应式界面** – 兼容移动端与桌面端
+- 🔓 **完全开源** – 可本地部署或二次开发
+
+## 🚀 使用说明
+
+1. 打开页面
+2. 粘贴 HTML 代码，或拖入 `.html` 文件
+3. 查看右侧生成的 Markdown 文本
+4. 点击“复制”按钮复制结果
+
+## 🔧 开发者说明
+
+后端接口：`POST /convert`
+
+请求示例：
+
+```json
+{ "html": "<p>示例</p>" }
+```
+
+响应示例：
+
+```json
+{ "markdown": "示例\n" }
+```
+
+> 当前页面输出为纯 Markdown 文本，代码块保留 Markdown 语法。若需进一步渲染高亮，可在前端增加 Markdown 渲染库。
 
 ## 🚀 在线体验
 
 👉 [https://html-to-md-qfrj.onrender.com](https://html-to-md-qfrj.onrender.com)
 
-> 注意：Render 免费实例若长时间无访问会休眠，首次打开可能需要几秒唤醒。
+> 注意：Render 免费实例可能会休眠，首次访问需要几秒唤醒。
 
 ## 🖼️ 界面预览
 
-![网页截图](./screenshots/20260516_024924.png )
+![网页截图](./screenshots/20260516_024924.png)
 
 ## 🛠️ 本地运行
 
@@ -55,7 +82,7 @@ python app.py
 
 ## 📦 部署
 
-你可以轻松将本项目部署到云平台（如 Render、Vercel、PythonAnywhere）。
+你可以将本项目部署到云平台，例如 Render、Vercel 或 PythonAnywhere。
 
 ### 部署到 Render（推荐）
 
@@ -65,7 +92,7 @@ python app.py
 4. 使用以下配置：
    - **Environment**: `Python 3`
    - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
+   - **Start Command**: `gunicorn app:app --bind 0.0.0.0:$PORT`
 5. 点击 **Create Web Service**，稍等片刻即可获得公网地址。
 
 ## 📁 项目结构
@@ -74,8 +101,8 @@ python app.py
 html-to-markdown-web/
 ├── app.py               # Flask 后端及前端界面
 ├── requirements.txt     # Python 依赖
-├── static/              # 静态资源（可选）
-├── templates/           # 模板文件（本项目中已内嵌于 app.py）
+├── static/              # 静态资源（目前为空）
+├── templates/           # 目前空目录，前端界面嵌入 app.py
 ├── .gitignore           # Git 忽略文件
 ├── LICENSE              # MIT 许可证
 └── README.md            # 项目说明

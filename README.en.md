@@ -1,27 +1,56 @@
-## 🌏 Language
-[简体中文](./README.md) | [English](README.en.md)
+# HTML to Markdown Converter
 
-A feature-rich online tool with a modern interface that quickly converts any HTML code into Markdown format. Built using Python Flask and the `html2text` library, it supports a wide range of elements including tables, links, images, and code blocks.
+[简体中文](./README.md) | [English](./README.en.md)
+
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)
+
+A lightweight Flask app that converts HTML code into Markdown text. It is ideal for notes, blog posts, documentation, or Markdown editors.
 
 ## ✨ Features
 
-- 🌗 **Dark Mode** – Supports switching between light and dark themes, automatically syncing with system preferences.
-- ⚡ **Real-time Conversion** – Converts as you type; no need to click a button (includes debouncing optimization).
-- 🖱️ **One-Click Copy** – Simply click a button to copy the generated Markdown to your clipboard.
-- 🗂️ **Drag-and-Drop Upload** – Drag `.html` files directly into the editor to automatically load and convert them.
-- 📚 **Sample Templates** – Provides one-click templates for simple text, tables, and code blocks.
-- 📱 **Responsive Design** – Perfectly optimized for both desktop and mobile devices.
-- 🎨 **Code Highlighting** – Automatically highlights code blocks within the output.
-- 🌐 **Free Online Tool** – No registration required; simply open your browser to start using it.
-- 🔓 **Fully Open Source** – Available for self-hosting or further development.
+- 🌗 **Dark / Light Mode** – Switch between themes with one click
+- ⚡ **Real-time Conversion** – Converts while typing, with debouncing to reduce requests
+- 🗂️ **Drag-and-Drop Upload** – Drag `.html` files into the editor to convert
+- 🖱️ **One-Click Copy** – Copy the generated Markdown result to the clipboard
+- 📚 **Sample Templates** – Built-in examples for simple text, tables, and code blocks
+- 📱 **Responsive Design** – Works on both desktop and mobile
+- 🔓 **Open Source** – Self-host or extend the project easily
+
+## 🚀 How to Use
+
+1. Open the page
+2. Paste HTML code or drop a `.html` file
+3. Review the generated Markdown text on the right
+4. Click the copy button to copy the output
+
+## 🔧 Developer Notes
+
+Backend endpoint: `POST /convert`
+
+Request example:
+
+```json
+{ "html": "<p>Example</p>" }
+```
+
+Response example:
+
+```json
+{ "markdown": "Example\n" }
+```
+
+> Note: The page currently outputs plain Markdown text. Code blocks are preserved as Markdown, and syntax highlighting can be added later with a Markdown renderer.
 
 ## 🚀 Try It Online
 
 👉 [https://html-to-md-qfrj.onrender.com](https://html-to-md-qfrj.onrender.com)
 
-> Note: Render's free instances go into hibernation after periods of inactivity; the application may take a few seconds to wake up when accessed for the first time. ## 🖼️ Interface Preview
+> Note: Render free instances may hibernate after inactivity and can take a few seconds to wake up.
 
-![Webpage Screenshot](./screenshots/20260516_024924.png )
+## 🖼️ Interface Preview
+
+![Webpage Screenshot](./screenshots/20260516_024924.png)
 
 ## 🛠️ Running Locally
 
@@ -37,7 +66,7 @@ A feature-rich online tool with a modern interface that quickly converts any HTM
 git clone https://github.com/your-username/html-to-markdown-web.git
 cd html-to-markdown-web
 
-# 2. Create a virtual environment (Recommended)
+# 2. Create a virtual environment (recommended)
 python -m venv venv
 source venv/bin/activate      # Linux / macOS
 # or .\venv\Scripts\activate   # Windows
@@ -49,22 +78,22 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open your browser and visit `http://127.0.0.1:5000` to start using the application.
+Open your browser and visit `http://127.0.0.1:5000`.
 
 ## 📦 Deployment
 
-You can easily deploy this project to cloud platforms (such as Render, Vercel, or PythonAnywhere).
+You can deploy this project to cloud platforms such as Render, Vercel, or PythonAnywhere.
 
 ### Deploying to Render (Recommended)
 
-1. Push your code to a GitHub repository.
+1. Push the code to GitHub.
 2. Log in to [Render](https://render.com) and select **New Web Service**.
 3. Connect your GitHub repository.
 4. Use the following configuration:
-- **Environment**: `Python 3`
-- **Build Command**: `pip install -r requirements.txt`
-- **Start Command**: `gunicorn app:app`
-5. Click **Create Web Service** and wait a few moments to receive your public URL.
+   - **Environment**: `Python 3`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn app:app --bind 0.0.0.0:$PORT`
+5. Click **Create Web Service** and wait for the public URL.
 
 ## 📁 Project Structure
 
@@ -72,8 +101,8 @@ You can easily deploy this project to cloud platforms (such as Render, Vercel, o
 html-to-markdown-web/
 ├── app.py               # Flask backend and frontend interface
 ├── requirements.txt     # Python dependencies
-├── static/              # Static assets (Optional)
-├── templates/           # Template files (Embedded within app.py in this project)
+├── static/              # Static assets (currently empty)
+├── templates/           # Empty folder, frontend is embedded in app.py
 ├── .gitignore           # Git ignore file
 ├── LICENSE              # MIT License
 └── README.md            # Project documentation
@@ -81,7 +110,9 @@ html-to-markdown-web/
 
 ## 🤝 Contributing
 
-Issues and Pull Requests are welcome! Any suggestions for improvement are highly valued. 1. Fork this repository
+Issues and Pull Requests are welcome! Any suggestions are appreciated.
+
+1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
@@ -93,8 +124,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 🙏 Acknowledgements
 
-- [Flask](https://flask.palletsprojects.com/) – A lightweight web framework
-- [html2text](https://github.com/Alir3z4/html2text) – Core library for converting HTML to Markdown
+- [Flask](https://flask.palletsprojects.com/) – Lightweight web framework
+- [html2text](https://github.com/Alir3z4/html2text) – Core HTML to Markdown library
 - [highlight.js](https://highlightjs.org/) – Code syntax highlighting
 ```
 
