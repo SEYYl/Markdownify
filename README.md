@@ -18,6 +18,8 @@
 - 🧹 **清空输入** – 一键清空 HTML 编辑区和结果区
 - 🔍 **Markdown 预览** – 生成后实时渲染预览，并支持代码块高亮
 - 🔎 **放大预览** – 点击可全屏展示预览面板，隐藏其他面板，方便阅读
+- 📲 **PWA 支持** – 可安装到桌面，支持离线使用核心页面
+- 👷 **Service Worker** – 智能缓存策略，API 请求离线时友好提示
 - 🌐 **URL 转换** – 输入网页地址后直接抓取页面并转换为 Markdown
 - 🧱 **侧边布局** – 切换为左右布局，编辑和预览并排显示，适合宽屏阅读
 - 📚 **示例模板** – 内置简单文本、表格、代码块示例
@@ -181,6 +183,18 @@ html-to-markdown-web/
 │   │   └── style.css        # 样式文件
 │   └── js/
 │       └── main.js          # 前端交互逻辑
+├── templates/                # 前端模板文件
+│   └── index.html           # 主页面模板
+├── static/
+│   ├── css/
+│   │   └── style.css        # 样式文件
+│   ├── js/
+│   │   └── main.js          # 前端交互逻辑
+│   ├── manifest.json        # PWA 应用清单
+│   ├── sw.js                # Service Worker（离线缓存）
+│   ├── icon.svg             # 应用图标（SVG 源文件）
+│   ├── icon-192.png         # PWA 图标 192×192
+│   └── icon-512.png         # PWA 图标 512×512
 ├── templates/                # 前端模板文件
 │   └── index.html           # 主页面模板
 ├── screenshots/              # 项目截图

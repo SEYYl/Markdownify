@@ -18,6 +18,8 @@ A lightweight Flask app that converts HTML code into Markdown text. It is ideal 
 - 🧹 **Clear Input** – Clear the HTML editor and reset outputs
 - 🔍 **Markdown Preview** – Render a live preview and highlight code blocks
 - 🔎 **Zoom Preview** – Expand the preview panel to full width and hide the other panels for easier reading
+- 📲 **PWA Support** – Installable on desktop/mobile, with offline access to core pages
+- 👷 **Service Worker** – Smart caching strategy; friendly offline fallback for API requests
 - 🌐 **URL Conversion** – Enter a webpage address and convert the page directly into Markdown
 - 🧱 **Side-by-Side Layout** – Switch to a side-by-side layout so editing and preview are shown together on wide screens
 - 📚 **Sample Templates** – Built-in examples for simple text, tables, and code blocks
@@ -170,8 +172,13 @@ html-to-markdown-web/
 ├── static/                   # Static assets (CSS, JS)
 │   ├── css/
 │   │   └── style.css         # Stylesheet
-│   └── js/
-│       └── main.js           # Frontend interaction logic
+│   ├── js/
+│   │   └── main.js           # Frontend interaction logic
+│   ├── manifest.json         # PWA app manifest
+│   ├── sw.js                 # Service Worker (offline cache)
+│   ├── icon.svg              # App icon (SVG source)
+│   ├── icon-192.png          # PWA icon 192×192
+│   └── icon-512.png          # PWA icon 512×512
 ├── templates/                # Frontend template files
 │   └── index.html            # Main page template
 ├── screenshots/              # Project screenshots
