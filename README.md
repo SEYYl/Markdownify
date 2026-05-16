@@ -110,9 +110,28 @@ python app.py
 
 ## 📦 部署
 
-你可以将本项目部署到云平台，例如 Render、Vercel 或 PythonAnywhere。
+### 📖 查看详细部署指南
 
-### 部署到 Render（推荐）
+**本项目提供了完整的部署文档，包含 6 种不同的部署方式：**
+
+ **[查看完整部署指南 »](DEPLOYMENT.md)**
+
+部署指南包括：
+- ✅ **部署前准备清单**
+- ️ **Render**（推荐 - 免费）
+- 🚂 **Railway**（$5 免费额度）
+- 🐍 **PythonAnywhere**（Python 专用）
+-  **Fly.io**（全球边缘节点）
+- 🐳 **Docker**（容器化部署）
+- 🖥️ **VPS/云服务器**（生产环境）
+- 📊 **部署对比表**（费用、难度、特性对比）
+-  **故障排除指南**（8 个常见问题及解决方案）
+
+---
+
+### 快速部署到 Render
+
+如果你想快速部署，可以按照以下简单步骤：
 
 1. 将代码推送到 GitHub 仓库。
 2. 登录 [Render](https://render.com) 并选择 **New Web Service**。
@@ -122,6 +141,8 @@ python app.py
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `gunicorn app:app --bind 0.0.0.0:$PORT`
 5. 点击 **Create Web Service**，稍等片刻即可获得公网地址。
+
+> 💡 **提示**：更多详细信息和故障排除，请查看 [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ## 📁 项目结构
 

@@ -102,9 +102,28 @@ Open your browser and visit `http://127.0.0.1:5000`.
 
 ## 📦 Deployment
 
-You can deploy this project to cloud platforms such as Render, Vercel, or PythonAnywhere.
+### View Detailed Deployment Guide
 
-### Deploying to Render (Recommended)
+**This project provides a comprehensive deployment guide with 6 different deployment methods:**
+
+ **[View Complete Deployment Guide »](DEPLOYMENT.md)**
+
+The deployment guide includes:
+- ✅ **Pre-deployment Checklist**
+- ☁️ **Render** (Recommended - Free)
+- 🚂 **Railway** ($5 free credits)
+- 🐍 **PythonAnywhere** (Python-focused)
+- 🪂 **Fly.io** (Global edge nodes)
+- 🐳 **Docker** (Containerized deployment)
+- 🖥️ **VPS/Cloud Server** (Production environment)
+- 📊 **Deployment Comparison Table** (cost, difficulty, features)
+- 🔧 **Troubleshooting Guide** (8 common issues and solutions)
+
+---
+
+### Quick Deploy to Render
+
+For a quick deployment, follow these simple steps:
 
 1. Push the code to GitHub.
 2. Log in to [Render](https://render.com) and select **New Web Service**.
@@ -114,6 +133,8 @@ You can deploy this project to cloud platforms such as Render, Vercel, or Python
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `gunicorn app:app --bind 0.0.0.0:$PORT`
 5. Click **Create Web Service** and wait for the public URL.
+
+> 💡 **Tip**: For more details and troubleshooting, check out [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ## 📁 Project Structure
 
