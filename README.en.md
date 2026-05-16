@@ -11,6 +11,7 @@ A lightweight Flask app that converts HTML code into Markdown text. It is ideal 
 
 - 🌗 **Dark / Light Mode** – Switch between themes with one click
 - ⚡ **Real-time Conversion** – Converts while typing, with debouncing to reduce requests
+- ⏳ **Loading State Indicator** – Elegant spinning animation during conversion to improve waiting experience
 - 🗂️ **Drag-and-Drop Upload** – Drag `.html` files into the editor to convert
 - 🖱️ **One-Click Copy** – Copy the generated Markdown result to the clipboard
 - ⬇️ **Download Markdown** – Save the generated result as a `.md` file

@@ -342,6 +342,39 @@ textarea:focus {
 .theme-btn.secondary:hover {
     background: rgba(107, 114, 128, 0.22);
 }
+/* Loading 指示器 */
+.loading-overlay {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 48px 16px;
+    position: absolute;
+    inset: 0;
+    background: var(--output-bg);
+    z-index: 5;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+.loading-overlay:not([aria-hidden="true"]) {
+    display: flex;
+}
+.markdown-output {
+    position: relative;
+}
+.loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--btn-bg);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
 .toast {
     position: fixed;
     left: 50%;

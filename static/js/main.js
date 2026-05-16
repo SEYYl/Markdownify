@@ -15,18 +15,43 @@ const toastContainer = document.getElementById('toastContainer');
 const layoutToggleBtn = document.getElementById('layoutToggleBtn');
 const themeToggle = document.getElementById('themeToggle');
 const pasteBtn = document.getElementById('pasteBtn');
+const loadingOutput = document.getElementById('loadingOutput');
+const loadingPreview = document.getElementById('loadingPreview');
 let currentMarkdown = '';
+let loadingTimeout = null;
+
+// Loading 状态控制
+function showLoading() {
+    // 使用短延迟防止闪烁（极快完成时不显示 loading）
+    loadingTimeout = setTimeout(() => {
+        loadingOutput.setAttribute('aria-hidden', 'false');
+        loadingPreview.setAttribute('aria-hidden', 'false');
+        // 清空原来的内容
+        markdownOutput.childNodes.forEach(node => {
+            if (node !== loadingOutput) node.remove();
+        });
+        markdownPreview.childNodes.forEach(node => {
+            if (node !== loadingPreview) node.remove();
+        });
+    }, 200);
+}
+
+function hideLoading() {
+    clearTimeout(loadingTimeout);
+    loadingOutput.setAttribute('aria-hidden', 'true');
+    loadingPreview.setAttribute('aria-hidden', 'true');
+}
 
 // 转换函数（调用后端）
 async function convertToMarkdown(html) {
     if (!html.trim()) {
+        hideLoading();
         currentMarkdown = '';
         markdownOutput.innerText = '';
         markdownPreview.innerHTML = '';
         return;
     }
-    markdownOutput.innerText = '⏳ 转换中...';
-    markdownPreview.innerHTML = '<p>⏳ 转换中...</p>';
+    showLoading();
     try {
         const response = await fetch('/convert', {
             method: 'POST',
@@ -34,6 +59,7 @@ async function convertToMarkdown(html) {
             body: JSON.stringify({ html: html })
         });
         const data = await response.json();
+        hideLoading();
         if (data.markdown !== undefined) {
             currentMarkdown = data.markdown;
             markdownOutput.innerText = data.markdown;
@@ -48,6 +74,7 @@ async function convertToMarkdown(html) {
             markdownPreview.innerHTML = '<p>转换失败，请检查 HTML 格式</p>';
         }
     } catch (err) {
+        hideLoading();
         markdownOutput.innerText = '网络错误：' + err.message;
         markdownPreview.innerHTML = '<p>网络错误：' + err.message + '</p>';
     }
@@ -78,8 +105,7 @@ async function convertUrlToMarkdown(url) {
         return;
     }
 
-    markdownOutput.innerText = '⏳ 抓取并转换中...';
-    markdownPreview.innerHTML = '<p>⏳ 抓取并转换中...</p>';
+    showLoading();
 
     try {
         const response = await fetch('/convert-url', {
@@ -88,6 +114,7 @@ async function convertUrlToMarkdown(url) {
             body: JSON.stringify({ url: url.trim() })
         });
         const data = await response.json();
+        hideLoading();
         if (response.ok && data.markdown !== undefined) {
             displayMarkdown(data.markdown);
             showToast('🔗 URL 转换成功！', 'success');
@@ -98,6 +125,7 @@ async function convertUrlToMarkdown(url) {
             showToast(errorMsg, 'error');
         }
     } catch (err) {
+        hideLoading();
         const errorMsg = '网络错误：' + err.message;
         markdownOutput.innerText = errorMsg;
         markdownPreview.innerHTML = `<p>${DOMPurify.sanitize(errorMsg)}</p>`;
@@ -147,6 +175,7 @@ downloadBtn.addEventListener('click', () => {
 clearBtn.addEventListener('click', () => {
     htmlInput.value = '';
     currentMarkdown = '';
+    hideLoading();
     markdownOutput.innerText = '';
     markdownPreview.innerHTML = '';
     htmlInput.focus();

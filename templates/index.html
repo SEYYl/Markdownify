@@ -101,7 +101,12 @@
                     <button id="copyBtn" class="copy-btn">📋 复制</button>
                 </div>
             </div>
-            <div id="markdownOutput" class="markdown-output"></div>
+            <div id="markdownOutput" class="markdown-output">
+                <div class="loading-overlay" id="loadingOutput" aria-hidden="true">
+                    <div class="loading-spinner"></div>
+                    <span>转换中...</span>
+                </div>
+            </div>
         </div>
         <div class="panel preview-panel">
             <div class="panel-header">
@@ -110,7 +115,12 @@
                     <button id="previewToggleBtn" class="copy-btn">🔎 放大预览</button>
                 </div>
             </div>
-            <div id="markdownPreview" class="markdown-output preview-output"></div>
+            <div id="markdownPreview" class="markdown-output preview-output">
+                <div class="loading-overlay" id="loadingPreview" aria-hidden="true">
+                    <div class="loading-spinner"></div>
+                    <span>转换中...</span>
+                </div>
+            </div>
         </div>
     </div>
     <footer>
