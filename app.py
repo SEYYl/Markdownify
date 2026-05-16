@@ -5,6 +5,18 @@ from urllib.parse import urlparse
 
 app = Flask(__name__)
 
+
+@app.route('/static/manifest.json')
+def manifest():
+    from flask import send_from_directory
+    import os
+    return send_from_directory(
+        os.path.join(app.root_path, 'static'),
+        'manifest.json',
+        mimetype='application/manifest+json'
+    )
+
+
 @app.route('/')
 def index():
     return render_template('index.html')

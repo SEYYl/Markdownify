@@ -1,0 +1,27 @@
+{
+  "name": "HTML to Markdown 转换器",
+  "short_name": "HTML→MD",
+  "description": "免费在线 HTML 转 Markdown 工具，支持实时转换、URL 抓取、拖拽上传。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/static/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity", "developer-tools"],
+  "lang": "zh-CN",
+  "dir": "ltr"
+}

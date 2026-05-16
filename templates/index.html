@@ -30,6 +30,13 @@
     <meta name="theme-color" content="#3b82f6">
     <link rel="canonical" href="https://html-to-md-qfrj.onrender.com">
     
+    <!-- PWA Manifest & Meta -->
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="apple-touch-icon" href="/static/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="HTML→MD">
+    
     <!-- 外部资源 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -130,5 +137,18 @@
     <div class="toast" id="toastContainer" aria-live="polite"></div>
 </div>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<!-- Service Worker 注册 -->
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/static/sw.js').then(reg => {
+            console.log('SW registered:', reg.scope);
+        }).catch(err => {
+            console.log('SW registration failed:', err);
+        });
+    });
+}
+</script>
 </body>
 </html>
