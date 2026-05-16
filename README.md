@@ -108,6 +108,21 @@ python app.py
 
 打开浏览器访问 `http://127.0.0.1:5000` 即可开始使用。
 
+### ️ 使用 Docker 快速部署
+
+本项目已提供 Docker 配置文件，可以快速启动：
+
+```bash
+# 方法一：使用 Docker
+docker build -t html-to-md-converter .
+docker run -d -p 5000:5000 --name html-to-md html-to-md-converter
+
+# 方法二：使用 Docker Compose（推荐）
+docker-compose up -d
+```
+
+访问 `http://localhost:5000` 即可使用。
+
 ## 📦 部署
 
 ### 📖 查看详细部署指南
@@ -118,9 +133,9 @@ python app.py
 
 部署指南包括：
 - ✅ **部署前准备清单**
-- ️ **Render**（推荐 - 免费）
+- ☁️ **Render**（推荐 - 免费）
 - 🚂 **Railway**（$5 免费额度）
-- 🐍 **PythonAnywhere**（Python 专用）
+-  **PythonAnywhere**（Python 专用）
 -  **Fly.io**（全球边缘节点）
 - 🐳 **Docker**（容器化部署）
 - 🖥️ **VPS/云服务器**（生产环境）

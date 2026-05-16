@@ -100,6 +100,21 @@ python app.py
 
 Open your browser and visit `http://127.0.0.1:5000`.
 
+### 🐳 Quick Deploy with Docker
+
+This project provides Docker configuration files for quick deployment:
+
+```bash
+# Method 1: Using Docker
+docker build -t html-to-md-converter .
+docker run -d -p 5000:5000 --name html-to-md html-to-md-converter
+
+# Method 2: Using Docker Compose (Recommended)
+docker-compose up -d
+```
+
+Visit `http://localhost:5000` to start using.
+
 ## 📦 Deployment
 
 ### View Detailed Deployment Guide

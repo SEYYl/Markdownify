@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  html-to-md:
+    build: .
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    environment:
+      - PORT=5000
+    volumes:
+      - ./static:/app/static  # 可选：挂载静态文件以便开发时实时预览
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - html-to-md-network
+
+networks:
+  html-to-md-network:
+    driver: bridge

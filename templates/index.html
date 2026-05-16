@@ -3,7 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>HTML to Markdown 在线转换器</title>
+    
+    <!-- SEO 元标签 -->
+    <title>HTML to Markdown 在线转换器 - 免费、快速、开源</title>
+    <meta name="description" content="免费在线 HTML 转 Markdown 工具，支持实时转换、URL 抓取、拖拽上传。开源项目，无广告，保护隐私。">
+    <meta name="keywords" content="HTML转Markdown,HTML to Markdown,在线转换,免费工具,开源,实时转换">
+    <meta name="author" content="HTML to Markdown Converter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / 社交媒体分享 -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://html-to-md-qfrj.onrender.com">
+    <meta property="og:title" content="HTML to Markdown 在线转换器">
+    <meta property="og:description" content="免费在线 HTML 转 Markdown 工具，支持实时转换、URL 抓取、拖拽上传。">
+    <meta property="og:image" content="https://raw.githubusercontent.com/SEYYl/html-to-markdown-web/main/screenshots/preview.png">
+    <meta property="og:locale" content="zh_CN">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://html-to-md-qfrj.onrender.com">
+    <meta name="twitter:title" content="HTML to Markdown 在线转换器">
+    <meta name="twitter:description" content="免费在线 HTML 转 Markdown 工具，支持实时转换、URL 抓取、拖拽上传。">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/SEYYl/html-to-markdown-web/main/screenshots/preview.png">
+    
+    <!-- 其他元标签 -->
+    <meta name="theme-color" content="#3b82f6">
+    <link rel="canonical" href="https://html-to-md-qfrj.onrender.com">
+    
+    <!-- 外部资源 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -32,7 +59,7 @@
             <button id="clearBtn" class="theme-btn">🧹 清空</button>
             <button id="urlConvertBtn" class="theme-btn">🌐 URL 转换</button>
             <button id="layoutToggleBtn" class="theme-btn">当前布局：堆叠</button>
-            <button id="themeToggle" class="theme-btn">🌙 深色模式</button>
+            <button id="themeToggle" class="theme-btn"> 深色模式</button>
         </div>
     </div>
 
@@ -40,7 +67,7 @@
         <div class="modal-backdrop"></div>
         <div class="modal-card">
             <div class="modal-header">
-                <span>🌐 URL 转换</span>
+                <span> URL 转换</span>
                 <button id="urlModalClose" class="icon-btn">✕</button>
             </div>
             <div class="modal-body">
@@ -70,7 +97,7 @@
             <div class="panel-header">
                 <div class="panel-title">📝 Markdown 输出</div>
                 <div class="panel-actions">
-                    <button id="downloadBtn" class="copy-btn">⬇️ 下载</button>
+                    <button id="downloadBtn" class="copy-btn">️ 下载</button>
                     <button id="copyBtn" class="copy-btn">📋 复制</button>
                 </div>
             </div>
