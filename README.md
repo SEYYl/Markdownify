@@ -159,23 +159,54 @@ docker-compose up -d
 
 > 💡 **提示**：更多详细信息和故障排除，请查看 [DEPLOYMENT.md](DEPLOYMENT.md)
 
-## 📁 项目结构
+##  项目结构
 
 ```
 html-to-markdown-web/
-├── app.py               # Flask 后端入口
-├── requirements.txt     # Python 依赖
-├── static/              # 静态资源（CSS、JS）
+├── app.py                    # Flask 后端入口
+├── requirements.txt          # Python 依赖
+├── Dockerfile                # Docker 镜像构建配置
+├── docker-compose.yml        # Docker Compose 配置
+├── DEPLOYMENT.md             # 完整部署指南文档
+├── .dockerignore             # Docker 构建忽略文件
+├── .env.example              # 环境变量配置模板
+├── .gitignore                # Git 忽略文件
+├── LICENSE                   # MIT 许可证
+├── README.md                 # 中文项目说明
+├── README.en.md              # 英文项目说明
+├── static/                   # 静态资源（CSS、JS）
 │   ├── css/
-│   │   └── style.css
+│   │   └── style.css        # 样式文件
 │   └── js/
-│       └── main.js
-├── templates/           # 前端模板文件
-│   └── index.html
-├── .gitignore           # Git 忽略文件
-├── LICENSE              # MIT 许可证
-└── README.md            # 项目说明
+│       └── main.js          # 前端交互逻辑
+├── templates/                # 前端模板文件
+│   └── index.html           # 主页面模板
+├── screenshots/              # 项目截图
+│   └── *.png                # 界面预览图
+└── venv/                     # Python 虚拟环境（已忽略）
 ```
+
+###  文件说明
+
+**核心文件：**
+- [`app.py`](app.py) - Flask 应用后端，提供 HTML 转换和 URL 抓取 API
+- [`requirements.txt`](requirements.txt) - Python 依赖包列表
+- [`templates/index.html`](templates/index.html) - 前端主页面
+
+**部署配置：**
+- [`Dockerfile`](Dockerfile) - Docker 镜像构建配置
+- [`docker-compose.yml`](docker-compose.yml) - Docker Compose 服务编排
+- [`.dockerignore`](.dockerignore) - Docker 构建时忽略的文件
+
+**文档：**
+- [`README.md`](README.md) - 中文项目说明文档
+- [`README.en.md`](README.en.md) - 英文项目说明文档
+- [`DEPLOYMENT.md`](DEPLOYMENT.md) - 详细部署指南（6种部署方案）
+
+**配置：**
+- [`.gitignore`](.gitignore) - Git 忽略文件配置
+- [`.env.example`](.env.example) - 环境变量配置示例
+- [`LICENSE`](LICENSE) - MIT 开源许可证
 
 ## 🤝 贡献
 

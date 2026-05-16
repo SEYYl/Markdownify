@@ -155,19 +155,46 @@ For a quick deployment, follow these simple steps:
 
 ```
 html-to-markdown-web/
-├── app.py               # Flask backend entrypoint
-├── requirements.txt     # Python dependencies
-├── static/              # Static assets (CSS, JS)
+├── app.py                    # Flask backend entrypoint
+├── requirements.txt          # Python dependencies
+├── Dockerfile                # Docker image build configuration
+├── docker-compose.yml        # Docker Compose service orchestration
+├── DEPLOYMENT.md             # Complete deployment guide
+├── .dockerignore             # Docker build ignore file
+├── .env.example              # Environment variable configuration template
+├── .gitignore                # Git ignore file
+├── LICENSE                   # MIT License
+├── README.md                 # Chinese project documentation
+├── README.en.md              # English project documentation
+├── static/                   # Static assets (CSS, JS)
 │   ├── css/
-│   │   └── style.css
+│   │   └── style.css         # Stylesheet
 │   └── js/
-│       └── main.js
-├── templates/           # Frontend template files
-│   └── index.html
-├── .gitignore           # Git ignore file
-├── LICENSE              # MIT License
-└── README.md            # Project documentation
+│       └── main.js           # Frontend interaction logic
+├── templates/                # Frontend template files
+│   └── index.html            # Main page template
+├── screenshots/              # Project screenshots
+│   └── *.png                 # UI preview images
+└── venv/                     # Python virtual environment (ignored)
 ```
+
+### 📄 File Descriptions
+
+**Core Files:**
+- [`app.py`](app.py) - Flask backend with HTML conversion and URL fetching APIs
+- [`requirements.txt`](requirements.txt) - Python dependencies list
+- [`templates/index.html`](templates/index.html) - Frontend main page
+
+**Deployment Configuration:**
+- [`Dockerfile`](Dockerfile) - Docker image build configuration
+- [`docker-compose.yml`](docker-compose.yml) - Docker Compose service orchestration
+- [`.dockerignore`](.dockerignore) - Files ignored during Docker build
+
+**Documentation:**
+- [`README.md`](README.md) - Chinese project documentation
+- [`README.en.md`](README.en.md) - English project documentation
+- [`DEPLOYMENT.md`](DEPLOYMENT.md) - Detailed deployment guide (6 deployment options)
+- [`.env.example`](.env.example) - Environment variable configuration example
 
 ## 🤝 Contributing
 
