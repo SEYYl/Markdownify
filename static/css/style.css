@@ -22,6 +22,158 @@ body.dark {
     --btn-hover: #3b82f6;
     --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
+
+/* ========== 赛博科技主题 ========== */
+body.cyber-theme {
+    --bg-body: #080c16;
+    --bg-panel: rgba(10, 16, 30, 0.93);
+    --border-color: #1a2d54;
+    --text-primary: #d6e4ff;
+    --text-secondary: #6e95d0;
+    --header-bg: #0c1428;
+    --output-bg: rgba(6, 10, 22, 0.95);
+    --btn-bg: #00c8ff;
+    --btn-hover: #3dd9ff;
+    --shadow: 0 0 24px rgba(0, 200, 255, 0.08);
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+body.cyber-theme {
+    background:
+        radial-gradient(ellipse at 50% -10%, rgba(0, 120, 255, 0.12), transparent 40%),
+        radial-gradient(ellipse at 80% 90%, rgba(120, 60, 255, 0.06), transparent 35%),
+        linear-gradient(180deg, #060b18 0%, #030610 100%);
+}
+
+body.cyber-theme .panel {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 200, 255, 0.05),
+        0 0 20px rgba(0, 120, 255, 0.06);
+    position: relative;
+}
+
+body.cyber-theme .panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 200, 255, 0.4), rgba(0, 200, 255, 0.6), rgba(0, 200, 255, 0.4), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+body.cyber-theme .toolbar button,
+body.cyber-theme .panel-header button,
+body.cyber-theme .example-btn {
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    font-size: 0.78rem;
+}
+
+body.cyber-theme .options-bar,
+body.cyber-theme .history-bar {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+body.cyber-theme .options-toggle {
+    border-radius: 8px !important;
+    letter-spacing: 0.04em;
+    font-size: 0.82rem !important;
+}
+
+body.cyber-theme textarea {
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', 'SF Mono', Monaco, Consolas, monospace;
+    font-size: 13px;
+}
+
+body.cyber-theme .markdown-output {
+    font-family: 'JetBrains Mono', 'SF Mono', Monaco, Consolas, monospace;
+    font-size: 13px;
+}
+
+body.cyber-theme .modal-card {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 40px rgba(0, 120, 255, 0.08);
+}
+
+body.cyber-theme .modal-body input,
+body.cyber-theme .modal-body textarea {
+    border-radius: 6px;
+}
+
+body.cyber-theme .toast {
+    border-radius: 6px;
+    border: 1px solid #1a2d54;
+}
+
+body.cyber-theme .loading-spinner {
+    border-top-color: #00c8ff;
+}
+
+body.cyber-theme .copy-btn,
+body.cyber-theme .theme-btn {
+    border-radius: 6px !important;
+}
+
+body.cyber-theme .modal-btn {
+    border-radius: 6px;
+}
+
+body.cyber-theme .modal-header,
+body.cyber-theme .modal-footer {
+    letter-spacing: 0.04em;
+}
+
+body.cyber-theme .option-item {
+    letter-spacing: 0.02em;
+}
+
+body.cyber-theme h1 {
+    background: linear-gradient(135deg, #00c8ff, #7c6dff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.cyber-theme .option-badge {
+    background: linear-gradient(135deg, #00c8ff, #6060ff);
+}
+
+/* 预览区域适配 */
+body.cyber-theme .preview-output {
+    color: var(--text-primary);
+}
+body.cyber-theme .preview-output a {
+    color: #5eb8ff;
+}
+body.cyber-theme .preview-output code {
+    background: rgba(0, 200, 255, 0.08);
+    border: 1px solid rgba(0, 200, 255, 0.12);
+}
+body.cyber-theme .preview-output pre {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(0, 200, 255, 0.1);
+}
+body.cyber-theme .preview-output table th {
+    background: rgba(0, 200, 255, 0.1);
+    border-color: var(--border-color);
+}
+body.cyber-theme .preview-output table td {
+    border-color: rgba(0, 200, 255, 0.15);
+}
+body.cyber-theme .preview-output blockquote {
+    border-left-color: #00c8ff;
+    color: #6e95d0;
+}
+
 * {
     box-sizing: border-box;
     transition: background-color 0.2s, color 0.2s;
@@ -99,6 +251,18 @@ h1 {
     gap: 20px;
     align-items: stretch;
 }
+
+/* 限制面板最大高度（仅堆叠模式），超长内容滚动显示 */
+body:not(.side-by-side) .converter-box .panel {
+    max-height: 55vh;
+}
+body:not(.side-by-side) .converter-box textarea {
+    max-height: calc(55vh - 52px);
+}
+body:not(.side-by-side) .converter-box .markdown-output {
+    max-height: calc(55vh - 52px);
+}
+
 body.side-by-side .converter-box {
     display: grid;
     grid-template-columns: minmax(340px, 1.2fr) minmax(420px, 0.95fr);
@@ -126,6 +290,21 @@ body.side-by-side .converter-box > .preview-panel {
 body.side-by-side .panel {
     min-width: 0;
 }
+
+/* 并排模式下，所有 panel-header 等高，避免因内容不同导致不对齐 */
+body.side-by-side .panel-header {
+    height: 52px;
+    overflow: hidden;
+}
+
+/* 并排模式下统一各面板布局 */
+body.side-by-side .panel {
+    overflow: hidden;
+}
+body.side-by-side textarea {
+    resize: none;
+}
+
 body.preview-expanded .converter-box {
     flex-direction: column;
     align-items: center;
@@ -138,7 +317,12 @@ body.preview-expanded .preview-panel {
     min-width: auto;
     width: 100%;
     max-width: 1200px;
+    max-height: 85vh;
     margin: 0 auto;
+    overflow: hidden;
+}
+body.preview-expanded .preview-panel .panel-header {
+    flex-shrink: 0;
 }
 body.preview-expanded .preview-output {
     padding: 24px;
@@ -186,9 +370,47 @@ body.preview-expanded .preview-output {
 .panel-title {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     white-space: nowrap;
 }
+
+/* 字数统计 */
+.char-count {
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    background: rgba(107, 114, 128, 0.1);
+    padding: 1px 7px;
+    border-radius: 8px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 输入模式切换标签 */
+.input-mode-tabs {
+    display: inline-flex;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 0.72rem;
+    font-weight: 500;
+}
+.input-mode-tab {
+    padding: 2px 8px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    background: transparent;
+    transition: all 0.15s;
+    user-select: none;
+}
+.input-mode-tab.active {
+    background: var(--btn-bg);
+    color: white;
+}
+.input-mode-tab:not(.active):hover {
+    background: rgba(107, 114, 128, 0.1);
+}
+
 .panel-actions {
     display: flex;
     align-items: center;
@@ -285,10 +507,62 @@ textarea:focus {
 .modal-footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    justify-content: flex-end;
+    gap: 10px;
     padding: 16px 20px;
     background: var(--header-bg);
+}
+
+/* Modal 按钮 */
+.modal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.modal-btn-primary {
+    background: var(--btn-bg);
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+}
+.modal-btn-primary:hover {
+    background: var(--btn-hover);
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+    transform: translateY(-1px);
+}
+.modal-btn-primary:active {
+    transform: translateY(0);
+}
+
+.modal-btn-cancel {
+    background: rgba(107, 114, 128, 0.1);
+    color: var(--text-secondary);
+}
+.modal-btn-cancel:hover {
+    background: rgba(107, 114, 128, 0.2);
+    color: var(--text-primary);
+}
+
+.modal-btn-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.modal-btn-danger:hover {
+    background: rgba(239, 68, 68, 0.15);
+}
+
+/* History section clear button inherits modal-btn styles */
+#clearHistoryBtn {
+    justify-content: center;
 }
 .modal-header {
     font-weight: 700;
@@ -322,6 +596,24 @@ textarea:focus {
     color: var(--text-secondary);
     font-size: 0.88rem;
     line-height: 1.5;
+}
+
+.modal-body textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(107, 114, 128, 0.16);
+    background: var(--bg-body);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    resize: vertical;
+    outline: none;
+    font-family: inherit;
+    line-height: 1.5;
+}
+.modal-body textarea:focus {
+    border-color: rgba(59, 130, 246, 0.65);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
 }
 .icon-btn {
     background: transparent;
@@ -417,6 +709,166 @@ footer a {
     color: var(--btn-bg);
     text-decoration: none;
 }
+/* ========== 转换选项面板 ========== */
+.options-bar {
+    margin-bottom: 16px;
+    background: var(--bg-panel);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.options-toggle {
+    width: 100%;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px !important;
+    border-radius: 16px !important;
+    background: var(--header-bg) !important;
+    color: var(--text-primary) !important;
+    font-size: 0.85rem !important;
+    cursor: pointer;
+    border: none;
+    min-height: 40px;
+}
+
+.options-toggle:hover {
+    opacity: 0.85;
+}
+
+.options-content {
+    display: none;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    padding: 12px 16px 14px;
+    background: var(--bg-panel);
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    user-select: none;
+}
+
+.option-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--btn-bg);
+    cursor: pointer;
+}
+
+.option-badge {
+    font-size: 0.7rem;
+    padding: 1px 6px;
+    border-radius: 8px;
+    background: var(--btn-bg);
+    color: white;
+    vertical-align: middle;
+    margin-left: 2px;
+}
+
+/* ========== 转换历史 ========== */
+.history-bar {
+    margin-top: 20px;
+    background: var(--bg-panel);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.history-content {
+    display: none;
+    padding: 8px 16px 14px;
+    background: var(--bg-panel);
+}
+
+.history-content #historyCount {
+    font-weight: normal;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+#historyList {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.history-empty {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 16px;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    gap: 8px;
+    transition: background 0.15s;
+    position: relative;
+}
+
+.history-item:hover {
+    background: var(--header-bg);
+}
+
+.history-item + .history-item {
+    border-top: 1px solid var(--border-color);
+}
+
+.history-badge {
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.history-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    flex: 1;
+    min-width: 0;
+}
+
+.history-time {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.history-delete {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    padding: 2px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+    line-height: 1;
+}
+.history-item:hover .history-delete {
+    opacity: 1;
+}
+.history-delete:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
 @media (max-width: 1000px) {
     .converter-box,
     body.side-by-side .converter-box {

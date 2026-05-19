@@ -1,11 +1,11 @@
 {
-  "name": "HTML to Markdown 转换器",
-  "short_name": "HTML→MD",
-  "description": "免费在线 HTML 转 Markdown 工具，支持实时转换、URL 抓取、拖拽上传。",
+  "name": "Markdownify",
+  "short_name": "Markdownify",
+  "description": "HTML, URLs & plain text → Markdown.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#3b82f6",
+  "background_color": "#080c16",
+  "theme_color": "#1a2d54",
   "orientation": "any",
   "icons": [
     {

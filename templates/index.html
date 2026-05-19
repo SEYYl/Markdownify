@@ -5,30 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     
     <!-- SEO 元标签 -->
-    <title>HTML to Markdown 在线转换器 - 免费、快速、开源</title>
-    <meta name="description" content="免费在线 HTML 转 Markdown 工具，支持实时转换、URL 抓取、拖拽上传。开源项目，无广告，保护隐私。">
-    <meta name="keywords" content="HTML转Markdown,HTML to Markdown,在线转换,免费工具,开源,实时转换">
-    <meta name="author" content="HTML to Markdown Converter">
+    <title>Markdownify</title>
+    <meta name="description" content="Turn HTML, URLs, and plain text into clean Markdown.">
+    <meta name="keywords" content="HTML转Markdown,Markdown转换,Markdownify">
+    <meta name="author" content="Markdownify">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph / 社交媒体分享 -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://html-to-md-qfrj.onrender.com">
-    <meta property="og:title" content="HTML to Markdown 在线转换器">
-    <meta property="og:description" content="免费在线 HTML 转 Markdown 工具，支持实时转换、URL 抓取、拖拽上传。">
+    <meta property="og:title" content="Markdownify">
+    <meta property="og:description" content="HTML, URLs & text → Markdown.">
     <meta property="og:image" content="https://raw.githubusercontent.com/SEYYl/html-to-markdown-web/main/screenshots/preview.png">
     <meta property="og:locale" content="zh_CN">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://html-to-md-qfrj.onrender.com">
-    <meta name="twitter:title" content="HTML to Markdown 在线转换器">
-    <meta name="twitter:description" content="免费在线 HTML 转 Markdown 工具，支持实时转换、URL 抓取、拖拽上传。">
+    <meta name="twitter:title" content="Markdownify">
+    <meta name="twitter:description" content="HTML, URLs & text → Markdown.">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/SEYYl/html-to-markdown-web/main/screenshots/preview.png">
     
     <!-- 其他元标签 -->
     <meta name="theme-color" content="#3b82f6">
     <link rel="canonical" href="https://html-to-md-qfrj.onrender.com">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
     
     <!-- PWA Manifest & Meta -->
     <link rel="manifest" href="/static/manifest.json">
@@ -39,10 +41,14 @@
     
     <!-- 外部资源 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=9">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+
     <script>
         marked.setOptions({
             gfm: true,
@@ -53,8 +59,8 @@
 </head>
 <body>
 <div class="container">
-    <h1>📝 HTML → Markdown 转换器</h1>
-    <div class="sub">粘贴 HTML、拖拽文件或选择示例，实时转换</div>
+    <h1>📝 Markdownify</h1>
+    <div class="sub">HTML / 网址 / 纯文本 → Markdown</div>
 
     <div class="toolbar">
         <div class="toolbar-left example-group">
@@ -65,8 +71,32 @@
         <div class="toolbar-actions">
             <button id="clearBtn" class="theme-btn">🧹 清空</button>
             <button id="urlConvertBtn" class="theme-btn">🌐 URL 转换</button>
+            <button id="batchUrlBtn" class="theme-btn">📚 批量 URL</button>
             <button id="layoutToggleBtn" class="theme-btn">当前布局：堆叠</button>
-            <button id="themeToggle" class="theme-btn"> 深色模式</button>
+            <button id="themeToggle" class="theme-btn">🌙 深色模式</button>
+        </div>
+    </div>
+
+    <!-- 转换选项面板 -->
+    <div class="options-bar" id="optionsBar">
+        <button class="options-toggle theme-btn" id="optionsToggle">⚙️ 转换选项 ▾</button>
+        <div class="options-content" id="optionsContent">
+            <label class="option-item" title="是否保留 HTML 中的链接">
+                <input type="checkbox" id="optLinks" checked>
+                <span>保留链接</span>
+            </label>
+            <label class="option-item" title="是否保留 HTML 中的图片">
+                <input type="checkbox" id="optImages" checked>
+                <span>保留图片</span>
+            </label>
+            <label class="option-item" title="是否保留 HTML 中的表格">
+                <input type="checkbox" id="optTables" checked>
+                <span>保留表格</span>
+            </label>
+            <label class="option-item" title="URL 转换时自动提取文章正文，去除导航/广告等无关内容">
+                <input type="checkbox" id="optReadability" checked>
+                <span>正文提取 <span class="option-badge">推荐</span></span>
+            </label>
         </div>
     </div>
 
@@ -83,8 +113,8 @@
                 <p class="modal-help">支持直接抓取网页并转换为 Markdown，可用于在线文章、文档或博客页面。</p>
             </div>
             <div class="modal-footer">
-                <button id="urlModalCancel" class="theme-btn secondary">取消</button>
-                <button id="urlModalSubmit" class="theme-btn">开始转换</button>
+                <button id="urlModalCancel" class="modal-btn modal-btn-cancel">取消</button>
+                <button id="urlModalSubmit" class="modal-btn modal-btn-primary">🚀 开始转换</button>
             </div>
         </div>
     </div>
@@ -92,17 +122,24 @@
     <div class="converter-box">
         <div class="panel" id="inputPanel">
             <div class="panel-header">
-                <div class="panel-title">📄 HTML 输入</div>
+                <div class="panel-title">
+                    <span>📄 输入</span>
+                    <span class="char-count" id="inputCharCount"></span>
+                    <div class="input-mode-tabs" id="inputModeTabs">
+                        <span class="input-mode-tab active" data-mode="html">HTML</span>
+                        <span class="input-mode-tab" data-mode="text">文本</span>
+                    </div>
+                </div>
                 <div class="panel-actions">
                     <button id="pasteBtn" class="copy-btn">📋 粘贴</button>
-                    <span class="panel-note">💡 支持拖拽 .html 文件</span>
+                    <button id="formatBtn" class="copy-btn">✨ 格式化</button>
                 </div>
             </div>
             <textarea id="htmlInput" rows="15" placeholder="在此粘贴 HTML 代码，或拖拽 HTML 文件到此处..."></textarea>
         </div>
         <div class="panel">
             <div class="panel-header">
-                <div class="panel-title">📝 Markdown 输出</div>
+                <div class="panel-title">📝 Markdown 输出 <span class="char-count" id="outputCharCount"></span></div>
                 <div class="panel-actions">
                     <button id="downloadBtn" class="copy-btn">️ 下载</button>
                     <button id="copyBtn" class="copy-btn">📋 复制</button>
@@ -130,17 +167,48 @@
             </div>
         </div>
     </div>
+    <!-- 批量 URL 模态框 -->
+    <div class="modal" id="batchUrlModal" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-card">
+            <div class="modal-header">
+                <span>📚 批量 URL 转换</span>
+                <button id="batchUrlModalClose" class="icon-btn">✕</button>
+            </div>
+            <div class="modal-body">
+                <label for="batchUrlInput">请输入网页地址，每行一个</label>
+                <textarea id="batchUrlInput" rows="6" placeholder="https://example.com/article1
+https://example.com/article2
+https://example.com/article3"></textarea>
+                <p class="modal-help">每个 URL 会单独抓取、提取正文并转换为 Markdown，最后合并输出。失败的 URL 会标记错误但不影响其他。</p>
+            </div>
+            <div class="modal-footer">
+                <button id="batchUrlModalCancel" class="modal-btn modal-btn-cancel">取消</button>
+                <button id="batchUrlModalSubmit" class="modal-btn modal-btn-primary">🚀 开始批量转换</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 转换历史 -->
+    <div class="history-bar" id="historyBar">
+        <button class="options-toggle theme-btn" id="historyToggle"><span>📜 转换历史 <span id="historyCount">0</span></span><span>▾</span></button>
+        <div class="history-content" id="historyContent">
+            <div id="historyList"></div>
+            <button id="clearHistoryBtn" class="modal-btn modal-btn-danger" style="display:none;margin-top:8px;width:100%;">🗑️ 清空历史</button>
+        </div>
+    </div>
+
     <footer>
         ⚡ 开源项目 · <a href="https://github.com/SEYYl/html-to-markdown-web" target="_blank">GitHub 仓库</a>
     </footer>
 
     <div class="toast" id="toastContainer" aria-live="polite"></div>
 </div>
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}?v=9"></script>
 
-<!-- Service Worker 注册 -->
+<!-- Service Worker 注册（开发环境自动跳过） -->
 <script>
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && !location.hostname.match(/^(localhost|127\.0\.0\.1)$/)) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/static/sw.js').then(reg => {
             console.log('SW registered:', reg.scope);
@@ -148,6 +216,14 @@ if ('serviceWorker' in navigator) {
             console.log('SW registration failed:', err);
         });
     });
+} else if (location.hostname.match(/^(localhost|127\.0\.0\.1)$/)) {
+    console.log('SW skipped (development mode)');
+    // 开发环境清除旧 SW
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(regs => {
+            regs.forEach(r => r.unregister());
+        });
+    }
 }
 </script>
 </body>

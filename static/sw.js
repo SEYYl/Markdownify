@@ -1,4 +1,4 @@
-const CACHE_NAME = 'html2md-v1';
+const CACHE_NAME = 'html2md-v2';
 
 // 需要预缓存的资源
 const PRECACHE_URLS = [
