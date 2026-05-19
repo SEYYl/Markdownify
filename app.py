@@ -344,5 +344,12 @@ def convert_urls():
 
 
 if __name__ == '__main__':
+    import warnings
+    if not os.environ.get('SECRET_KEY'):
+        warnings.warn('SECRET_KEY 未设置。生产环境建议通过环境变量配置。')
+        app.secret_key = os.urandom(24).hex()
+    else:
+        app.secret_key = os.environ['SECRET_KEY']
+
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)

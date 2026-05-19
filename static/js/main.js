@@ -535,15 +535,32 @@ copyBtn.addEventListener('click', async () => {
         showToast('没有可复制的内容', 'error');
         return;
     }
+
+    // 尝试 clipboard API
     try {
         await navigator.clipboard.writeText(currentMarkdown);
         showToast('已成功复制到剪贴板', 'success');
-        const originalText = copyBtn.innerText;
-        copyBtn.innerText = '✅ 已复制';
-        setTimeout(() => { copyBtn.innerText = originalText; }, 1500);
-    } catch (err) {
-        showToast('复制失败，可手动选择', 'error');
+    } catch {
+        // fallback: 用 textarea 选中 + execCommand
+        try {
+            const ta = document.createElement('textarea');
+            ta.value = currentMarkdown;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('已成功复制到剪贴板', 'success');
+        } catch {
+            showToast('复制失败，请手动选择后 Ctrl+C', 'error');
+            return;
+        }
     }
+
+    const originalText = copyBtn.innerText;
+    copyBtn.innerText = '✅ 已复制';
+    setTimeout(() => { copyBtn.innerText = originalText; }, 1500);
 });
 
 downloadBtn.addEventListener('click', () => {
