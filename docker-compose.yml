@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  html-to-md:
+  markdownify:
     build: .
     ports:
       - "5000:5000"
@@ -17,8 +17,8 @@ services:
       retries: 3
       start_period: 10s
     networks:
-      - html-to-md-network
+      - markdownify-network
 
 networks:
-  html-to-md-network:
+  markdownify-network:
     driver: bridge
