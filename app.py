@@ -4,6 +4,15 @@ import requests
 import re
 from urllib.parse import urlparse
 import os
+import ipaddress
+
+
+# 常量
+USER_AGENT = (
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+    'AppleWebKit/537.36 (KHTML, like Gecko) '
+    'Chrome/120.0.0.0 Safari/537.36'
+)
 
 app = Flask(__name__)
 
@@ -80,13 +89,10 @@ def convert_url():
         return jsonify({'markdown': '', 'error': '请输入有效的 http:// 或 https:// 地址'}), 400
 
     try:
-        response = requests.get(url, timeout=10, headers={
-            'User-Agent': (
-                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                'AppleWebKit/537.36 (KHTML, like Gecko) '
-                'Chrome/120.0.0.0 Safari/537.36'
-            )
-        })
+        if not is_safe_url(url):
+            return jsonify({'markdown': '', 'error': '不允许访问内网地址'}), 400
+
+        response = requests.get(url, timeout=10, headers={'User-Agent': USER_AGENT})
         response.raise_for_status()
         html = response.text
 
@@ -132,6 +138,45 @@ def text_to_html(text):
                 result.append(f'</{list_tag}>')
                 in_list = False
             i += 1
+            continue
+
+        # Code block (```)
+        if stripped.startswith('```'):
+            if in_list:
+                result.append(f'</{list_tag}>')
+                in_list = False
+            lang = stripped[3:].strip()
+            code_lines = []
+            i += 1
+            while i < len(lines):
+                if lines[i].strip().startswith('```'):
+                    break
+                code_lines.append(lines[i])
+                i += 1
+            code = html_module.escape('\n'.join(code_lines))
+            result.append(f'<pre><code class="language-{html_module.escape(lang)}">{code}</code></pre>' if lang else f'<pre><code>{code}</code></pre>')
+            i += 1
+            continue
+
+        # Horizontal rule
+        if re.match(r'^-{3,}$', stripped) or re.match(r'^\*{3,}$', stripped):
+            if in_list:
+                result.append(f'</{list_tag}>')
+                in_list = False
+            result.append('<hr>')
+            i += 1
+            continue
+
+        # Blockquote (multi-line support)
+        if stripped.startswith('> '):
+            if in_list:
+                result.append(f'</{list_tag}>')
+                in_list = False
+            quote_parts = []
+            while i < len(lines) and lines[i].strip().startswith('> '):
+                quote_parts.append(html_module.escape(lines[i].strip()[2:]))
+                i += 1
+            result.append(f'<blockquote>{"<br>".join(quote_parts)}</blockquote>')
             continue
 
         # Headings
@@ -207,7 +252,7 @@ def convert_text():
 
 
 def extract_title(html):
-    """Extract page title from HTML.""",
+    """Extract page title from HTML."""
     match = re.search(r'<title[^>]*>(.*?)</title>', html, re.IGNORECASE | re.DOTALL)
     if match:
         return match.group(1).strip()
@@ -220,6 +265,21 @@ def is_valid_url(url):
         return parsed.scheme in ('http', 'https') and bool(parsed.netloc)
     except Exception:
         return False
+
+
+def is_safe_url(url):
+    """Check URL doesn't point to private/internal IP."""
+    host = urlparse(url).hostname
+    if not host:
+        return False
+    # Block localhost and common internal hostnames
+    if host in ('localhost', '127.0.0.1', '::1', '0.0.0.0'):
+        return False
+    try:
+        ip = ipaddress.ip_address(host)
+        return not ip.is_private
+    except ValueError:
+        return True  # domain name, DNS resolution happens server-side
 
 
 @app.route('/convert-urls', methods=['POST'])
@@ -245,13 +305,11 @@ def convert_urls():
             continue
 
         try:
-            response = requests.get(url, timeout=10, headers={
-                'User-Agent': (
-                    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                    'AppleWebKit/537.36 (KHTML, like Gecko) '
-                    'Chrome/120.0.0.0 Safari/537.36'
-                )
-            })
+            if not is_safe_url(url):
+                results.append({'url': url, 'success': False, 'error': '不允许访问内网地址'})
+                continue
+
+            response = requests.get(url, timeout=10, headers={'User-Agent': USER_AGENT})
             response.raise_for_status()
             html = response.text
 
